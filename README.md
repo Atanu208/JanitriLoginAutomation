@@ -74,5 +74,7 @@ slf4j & logback for optional logging
 
 ### Final Notes
 No real credentials are used.
+
 Only negative scenarios are tested.
+
 This is a UI-level test suite and not connected to backend validation.
