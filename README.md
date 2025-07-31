@@ -63,9 +63,13 @@ mvn test -DsuiteXmlFile=testng.xml
 
 ### ⚙️ Dependencies
 Managed via pom.xml. Key dependencies include:
+
 selenium-java (v4.34.0)
+
 testng (v7.10.1)
+
 webdrivermanager (v5.8.0)
+
 slf4j & logback for optional logging
 
 ### Final Notes
