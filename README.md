@@ -27,15 +27,8 @@ Automate and validate the login UI behavior for the Janitri Dashboard without us
 ---
 
 ## 📂 Project Structure
-├── base/
-│ └── BaseTest.java # Handles WebDriver setup and teardown
-├── pages/
-│ └── LoginPage.java # POM class with locators and actions
-├── tests/
-│ └── LoginTests.java # Test class with automated test cases
-├── pom.xml # Maven configuration and dependencies
-├── testng.xml # TestNG suite file
-└── README.md # Project documentation
+<img width="332" height="451" alt="image" src="https://github.com/user-attachments/assets/862024d0-290e-400f-8f19-5f027a9b2e9e" />
+
 
 ---
 
