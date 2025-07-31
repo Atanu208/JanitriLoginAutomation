@@ -33,11 +33,10 @@ Automate and validate the login UI behavior for the Janitri Dashboard without us
 ---
 
 ## 🚦 Automated Test Cases
-
-`testLoginButtonDisabledWhenFieldsAreEmpty()` - Ensures the login button is disabled when fields are empty 
-`testPasswordMaskedButton()`                  - Validates the password masking and unmasking functionality 
-`testInvalidLoginShowErrorMsg()`              - Enters invalid credentials and verifies the error message 
-`testLoginPageElementsPresent()`              - Checks visibility of all key elements on the login page 
+testLoginButtonDisabledWhenFieldsAreEmpty() - Ensures the login button is disabled when fields are empty 
+testPasswordMaskedButton()                  - Validates the password masking and unmasking functionality 
+testInvalidLoginShowErrorMsg()              - Enters invalid credentials and verifies the error message 
+testLoginPageElementsPresent()              - Checks visibility of all key elements on the login page 
 
 ---
 
@@ -53,7 +52,6 @@ This framework:
 ## ▶️ How to Run
 
 ### 1. Clone the repository:
-
 git clone https://github.com/your-username/JanitriLoginAutomation.git
 cd JanitriLoginAutomation
 
