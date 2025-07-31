@@ -15,10 +15,16 @@ import pages.LoginPage;
 public class LoginTests extends BaseTest {
 
     @Test
-public void testLoginButtonDisabledWhenFieldsAreEmpty() {
-    LoginPage loginPage = new LoginPage(driver);
-    Assert.assertFalse(loginPage.isLoginButtonEnabled(), "Login button should be disabled when fields are empty.");
-}
+    public void testLoginPageElementsPresent() {
+        LoginPage loginPage = new LoginPage(driver);
+        Assert.assertTrue(loginPage.isPageLoaded(), "All login page elements should be visible.");
+    }
+
+    @Test
+    public void testLoginButtonDisabledWhenFieldsAreEmpty() {
+        LoginPage loginPage = new LoginPage(driver);
+        Assert.assertFalse(loginPage.isLoginButtonEnabled(), "Login button should be disabled when fields are empty.");
+    }
 
 @Test
 public void testPasswordMaskedButton() {
@@ -36,18 +42,22 @@ public void testInvalidLoginShowErrorMsg() {
     loginPage.enterPassword("invalid");
     loginPage.clickLogin();
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+    // Wait until the error div contains the expected text
     WebElement errorDiv = wait.until(ExpectedConditions.visibilityOfElementLocated(
         By.className("invalid-credential-div")
+    ));
+
+    // Wait until the text is exactly what we want
+    boolean messageAppeared = wait.until(ExpectedConditions.textToBePresentInElement(
+        errorDiv, "Invalid Credentials"
     ));
 
     String errorText = errorDiv.getText().trim();
     System.out.println("Error Message Shown: " + errorText);
 
-    Assert.assertTrue(
-        errorText.contains("Invalid Credentials"),
-        "Expected error message about invalid credentials"
-    );
+    Assert.assertTrue(messageAppeared, "Expected 'Invalid Credentials' error to appear.");
 }
 
 }

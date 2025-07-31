@@ -18,20 +18,21 @@ import java.util.Map;
 
 public class BaseTest {
     protected WebDriver driver;
+
 @BeforeMethod
 public void setup() {
     WebDriverManager.chromedriver().setup();
 
     ChromeOptions options = new ChromeOptions();
     Map<String, Object> prefs = new HashMap<>();
-    prefs.put("profile.default_content_setting_values.notifications", 1); // allow notifications
+    prefs.put("profile.default_content_setting_values.notifications", 2); // block notifications
     options.setExperimentalOption("prefs", prefs);
 
     driver = new ChromeDriver(options);
     driver.manage().window().maximize();
     driver.get("https://dev-dash.janitri.in/");
 
-    // Handle the custom notification overlay
+    // Handle custom notification overlay *before* interacting with page
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     try {
         WebElement overlayText = wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -40,7 +41,6 @@ public void setup() {
 
         System.out.println("Overlay detected.");
 
-        // Try clicking the Reload button if it exists
         try {
             WebElement reloadBtn = driver.findElement(By.xpath("//button[contains(text(), 'Reload')]"));
             if (reloadBtn.isDisplayed() && reloadBtn.isEnabled()) {
@@ -50,20 +50,18 @@ public void setup() {
                 System.out.println("Overlay cleared.");
             }
         } catch (Exception e) {
-            System.out.println("Reload button not found or not clickable. Trying to bypass...");
+            System.out.println("Reload button not found. Removing overlay...");
         }
 
-        // As last resort, try removing modal forcibly
         ((JavascriptExecutor) driver).executeScript(
             "document.querySelector('.dialog-login')?.remove();"
         );
         System.out.println("Overlay forcibly removed.");
 
     } catch (Exception e) {
-        System.out.println("No overlay detected. Proceeding...");
+        System.out.println("No overlay detected.");
     }
 }
-
 
     @AfterMethod
     public void tearDown() {
