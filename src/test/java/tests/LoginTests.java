@@ -17,8 +17,10 @@ public class LoginTests extends BaseTest {
     @Test
     public void testLoginButtonDisabledWhenFieldsAreEmpty() {
         LoginPage loginPage = new LoginPage(driver);
-        Assert.assertTrue(loginPage.isLoginButtonEnabled()); 
+        // Ensure fields are empty
+        Assert.assertFalse(loginPage.isLoginButtonEnabled(), "Login button should be disabled when fields are empty.");
     }
+
 
     @Test
     public void testPasswordMaskedButton() {
@@ -42,13 +44,12 @@ public class LoginTests extends BaseTest {
             By.className("invalid-credential-div")
         ));
 
-        // Optional: Validate the error text
-        String errorText = errorDiv.getText();
+        // Validate the actual text
+        String errorText = errorDiv.getText().trim();
         System.out.println("Error Message Shown: " + errorText);
 
-        Assert.assertTrue(errorText.contains("Error:"));
+        Assert.assertEquals(errorText, "Invalid Credentials");
     }
-
 
     @Test
     public void testLoginPageElementsPresent() {
